@@ -1,6 +1,9 @@
 from faker import Faker
 import random
 from datetime import datetime
+import os
+import json
+import dotenv
 
 fake = Faker()
 actions = ['login', 'logout', 'purchase', 'add_to_cart', 'view_item', 'search']
@@ -21,5 +24,25 @@ def create_fake_log_entry():
         }
     }
 
-log = create_fake_log_entry()
-print(log)
+# log = create_fake_log_entry()
+# print(log)
+
+def generate_logs(num_logs=10):
+    """
+    Generates and appends fake user log entries to a file.
+    """
+
+    log_directory = str(os.environ.get('LOG_DIR'))
+    log_file = str(os.environ.get('LOG_FILE'))
+
+    if not os.path.exists(log_directory):
+        os.makedirs(log_directory)
+
+    with open(log_file, 'a') as f:
+        for _ in range(num_logs):
+            log_entry = create_fake_log_entry()
+            f.write(json.dumps(log_entry) + "\n")  # Write each log entry in JSON format
+            print('a log entered')
+
+dotenv.load_dotenv()
+generate_logs(10)
