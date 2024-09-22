@@ -40,10 +40,13 @@ def generate_logs(num_logs=10):
     with open(log_file, 'a') as f:
         for _ in range(num_logs):
             log_entry = create_fake_log_entry()
+            
             f.write(json.dumps(log_entry) + "\n")  # Write each log entry in JSON format
+            f.flush()  # Force writing to the file immediately
+            
             print('a log entered')
             time.sleep(60)
 
-if __name__ == "__main":
+if __name__ == "__main__":
     dotenv.load_dotenv()
     generate_logs(10)
