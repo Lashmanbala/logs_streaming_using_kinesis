@@ -26,7 +26,7 @@ def create_fake_log_entry():
     }
 
 
-def generate_logs(num_logs=10):
+def generate_logs(num_logs):
     """
     Generates and appends fake user log entries to a file.
     """
