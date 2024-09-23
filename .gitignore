@@ -1,1 +1,3 @@
 kinesis_venv/
+.env
+.generate_logs.py.swp
