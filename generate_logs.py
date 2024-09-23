@@ -44,9 +44,8 @@ def generate_logs(num_logs):
             f.write(json.dumps(log_entry) + "\n")  # Write each log entry in JSON format
             f.flush()  # Force writing to the file immediately
             
-            print('a log entered')
-            time.sleep(60)
+            time.sleep(10)
 
 if __name__ == "__main__":
     dotenv.load_dotenv()
-    generate_logs(10)
+    generate_logs(100)
