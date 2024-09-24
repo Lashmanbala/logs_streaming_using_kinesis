@@ -1,0 +1,11 @@
+{
+    "cloudwatch.emitMetrics": false,
+    //"awsAccessKeyId":"yourAccessKey",
+    //"awsSecretAccessKey":"yourSecretKey",
+  
+    "flows": [
+      {
+        "filePattern": "/home/kinesis/logs/users_activity.log",
+        "deliveryStream": "user_logs_stream"
+      }
+    ]

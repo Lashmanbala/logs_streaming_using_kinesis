@@ -15,3 +15,4 @@ RUN sudo service aws-kinesis-agent start
 
 ENV LOG_DIR=/home/kinesis/logs
 ENV LOG_FILE=/home/kinesis/logs/users_activity.log
+
