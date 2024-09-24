@@ -1,4 +1,4 @@
-from aws_util import create_bucket
+from aws_util import create_bucket, create_iam_role
 
 bkt_name = 'user-logs-bucket-1'
 def return_bucket_arn(bkt_name):
@@ -9,3 +9,6 @@ def return_bucket_arn(bkt_name):
 
 arn = return_bucket_arn(bkt_name)
 print(arn)
+
+role_arn = create_iam_role()
+print(role_arn)
