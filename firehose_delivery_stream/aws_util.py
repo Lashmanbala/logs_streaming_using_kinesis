@@ -1,15 +1,17 @@
 import boto3
 import json
+import time
 
 def create_bucket(bucket_name):
     s3_client = boto3.client('s3')
     res = s3_client.create_bucket(Bucket=bucket_name)
-        
-    return res
 
-def create_iam_role():
-    import boto3
+    if res['ResponseMetadata']['HTTPStatusCode'] == 200:
+        bucket_arn = f'arn:aws:s3:::{bucket_name}'
+    
+    return bucket_arn
 
+def create_iam_role(s3_bucket_name):
     iam_client = boto3.client('iam')
 
     trust_policy = {
@@ -36,7 +38,6 @@ def create_iam_role():
     )
 
     # Define an inline policy that grants the role S3 write permissions
-    s3_bucket_name = 'your-s3-bucket-name'  # Replace with your actual bucket name
     s3_policy = {
         "Version": "2012-10-17",
         "Statement": [
@@ -58,6 +59,8 @@ def create_iam_role():
         PolicyDocument=json.dumps(s3_policy)
     )
 
-    # Print role ARN
-    role_arn = create_role_response['Role']['Arn']
-    return role_arn
+    arn = create_role_response['Role']['Arn']
+
+    time.sleep(10)  # Wait untill the role is created
+
+    return arn
