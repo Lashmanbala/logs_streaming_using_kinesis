@@ -64,3 +64,31 @@ def create_iam_role(s3_bucket_name):
     time.sleep(10)  # Wait untill the role is created
 
     return arn
+
+def create_delivery_stream(delivery_stream_name, s3_bucket_arn, role_arn, S3_path_prefix, buffer_size, buffer_time):
+    firehose_client = boto3.client('firehose')
+
+    # Create the delivery stream
+    response = firehose_client.create_delivery_stream(
+        DeliveryStreamName=delivery_stream_name,
+        S3DestinationConfiguration={
+            'RoleARN': role_arn,
+            'BucketARN': s3_bucket_arn,
+            'Prefix': S3_path_prefix,
+            'ErrorOutputPrefix': 'error/',
+            'BufferingHints': {
+                'SizeInMBs': buffer_size,  # Buffer size before data is delivered
+                'IntervalInSeconds': buffer_time  # Buffer time before delivery
+            },
+            'EncryptionConfiguration': {
+                'NoEncryptionConfig': 'NoEncryption'  # Use 'NoEncryption' or KMS settings
+            },
+            'CloudWatchLoggingOptions': {
+                'Enabled': True,
+                'LogGroupName': 'firehose-delivery-stream-logs',
+                'LogStreamName': 'firehose-delivery-stream-log-stream'
+            }
+        }
+    )
+
+    return response
