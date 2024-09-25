@@ -1,3 +1,4 @@
 kinesis_venv/
-.env
-.generate_logs.py.swp
+logs_server/.env
+firehose_delivery_stream/.env
+logs_server/.generate_logs.py.swp
