@@ -6,6 +6,6 @@
     "flows": [
       {
         "filePattern": "/home/kinesis/logs/users_activity.log",
-        "deliveryStream": "user_logs_stream"
+        "deliveryStream": "user-logs-s3-stream"
       }
     ]
