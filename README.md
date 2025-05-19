@@ -51,7 +51,8 @@ Ensure you have the following are installed:
 5. **Build the Docker image:**
 
    Ensure Docker is installed and running.
-   Create a .env file like sample.env file in logs_server directory.
+  
+   Edit the Dockerfile with proper env variables and other values.
 
    Then build the image using:
     ```bash
@@ -60,7 +61,7 @@ Ensure you have the following are installed:
     ```
 
 6. **Run the container:**
-    
+   
    Start the container in interactive mode. Then run the python script to begin generating logs:
     ```bash
     docker run -it logs-server /bin/bash
